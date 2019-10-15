@@ -1,0 +1,30 @@
+[package]
+name = "rocket-diesel"
+version = "0.0.1"
+authors = ["CugeDe <cugede.0x07ffff@gmail.com>"]
+description = """
+Rust library providing a plugin loading and managing Diesel depending on its
+associated configuration.
+"""
+repository = "https://github.com/CugeDe/rocket-diesel"
+edition = "2018"
+license = "MIT/Apache-2.0"
+readme = "./README.md"
+keywords = ["rocket", "rocket-diesel", "diesel", "database", "dynamic"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rocket = "0.4"
+rocket-config = "0.0"
+url = "2.1.0"
+
+[dependencies.diesel]
+version = "1.4"
+default-features = false
+features = ["mysql", "postgres", "sqlite"]
+
+[dependencies.rocket_contrib]
+version = "0.4"
+default-features = false
+features = ["databases"]
