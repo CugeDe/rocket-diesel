@@ -16,7 +16,6 @@ keywords = ["rocket", "rocket-diesel", "diesel", "database", "dynamic"]
 
 [dependencies]
 rocket = "0.4"
-rocket-config = "0.0"
 url = "2.1.0"
 
 [dependencies.diesel]
@@ -28,3 +27,8 @@ features = ["mysql", "postgres", "sqlite"]
 version = "0.4"
 default-features = false
 features = ["databases"]
+
+[dependencies.rocket-config]
+git = "https://github.com/CugeDe/rocket-config"
+branch = "master"
+default-features = false
