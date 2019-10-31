@@ -30,7 +30,17 @@ impl Connection
 
     pub fn lock(&self) -> LockResult<MutexGuard<'_, Option<Box<dyn Any>>>>
     {
-        self._connection.lock()
+        log::debug!("Locking connection...");
+        
+        let lock = self._connection.lock();
+
+        if lock.is_ok() {
+            log::debug!("Successfully locked connection!");
+        } else {
+            log::debug!("Failed to lock connection.");
+        }
+
+        lock
     }
 
     pub fn initialized(&self) -> Result<bool>

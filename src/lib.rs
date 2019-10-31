@@ -1,5 +1,4 @@
 #![feature(arbitrary_self_types, decl_macro, proc_macro_hygiene)]
-
 #![warn(rust_2018_idioms)]
 
 mod configuration;

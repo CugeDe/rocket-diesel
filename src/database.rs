@@ -103,7 +103,11 @@ impl Database
     }
 
     fn initialize(&self) -> Result<()> {
+        log::info!("Initializing database...");
+
         let settings = self.settings()?;
+        log::debug!("Extracted settings from configurations: {:?}", settings);
+
         let database = match settings.url().scheme() {
             "mysql" => {
                 let mysql = diesel::MysqlConnection::establish(
@@ -128,6 +132,12 @@ impl Database
             },
             _ => { None }
         };
+
+        if database.is_some() {
+            log::debug!("Successfully wrapped database connection!");
+        } else {
+            log::debug!("Unknown database scheme.");
+        }
 
         let mut guard = self._database.lock().map_err(|_err| error::Error::new(
             error::ErrorKind::Other, "failed to update database connection"
@@ -205,7 +215,7 @@ impl Database
 
         if lock.is_err() {
             return Err(error::Error::new(
-                error::ErrorKind::Other, "database got poisoned"
+                error::ErrorKind::Other, lock.unwrap_err()
             ));
         }
         let mut guard = lock.unwrap();
